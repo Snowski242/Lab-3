@@ -11,10 +11,15 @@ public class navmeshseek : MonoBehaviour
     public Animator animator;
     private bool touchingEnemy;
     private bool startWalking = false;
+    [SerializeField]private int speed = 3;
+    [SerializeField] private float animatorSpeed = 1;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        agent.speed = speed;
+        animator.speed = animatorSpeed;
 
         StartCoroutine(Walk());
     }
@@ -36,6 +41,8 @@ public class navmeshseek : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
             animator.SetTrigger("Attacking");
+            animator.speed = 1;
+            agent.speed = 0;
         }
     }
 
